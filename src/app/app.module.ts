@@ -5,13 +5,15 @@ import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
 import { Sessions } from '../pages/sessions/sessions';
 import { Speakers } from '../pages/speakers/speakers';
+import { SessionDetail } from '../pages/session-detail/session-detail';
 
 @NgModule({
   declarations: [
     MyApp,
     Home,
     Sessions,
-    Speakers
+    Speakers,
+    SessionDetail
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -22,7 +24,8 @@ import { Speakers } from '../pages/speakers/speakers';
     MyApp,
     Home,
     Sessions,
-    Speakers
+    Speakers,
+    SessionDetail
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

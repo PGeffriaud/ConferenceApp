@@ -24,12 +24,11 @@ export class SpeakerService {
   /*
     Return the first speaker of the ids array
   */
-  getSpeakerByIds(ids: Array<string> ): Promise<Speaker> {
+  getSpeakerByIds(ids: Array<string> ): Promise<Array<Speaker>> {
     return new Promise((resolve, reject) => {
       if(ids && ids.length > 0) {
         this.http.request(this.path).subscribe(res => {
-          var s = res.json()['speakers'].find(speaker => speaker.id === ids[0])
-          resolve(s);
+          resolve(res.json()['speakers'].filter(speaker => ids.indexOf(speaker.id) >= 0))
         })
       } else {
         resolve(undefined)

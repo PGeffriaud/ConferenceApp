@@ -9,20 +9,20 @@
 
 <ion-content>
   <ion-list no-lines>
-      <ion-card *ngFor="let item of items" (click)="lookAt(item.id)">
+      <ion-card *ngFor="let item of items" (click)="lookAt(item.session.id)">
         <ion-item text-wrap>
           <ion-avatar item-left>
             <img src="images/{{item.speakerPic}}">
           </ion-avatar>
-          <h2>{{item.title}}</h2>
-          <p>{{item.room}} - {{item.speakerName}}</p>
+          <h2>{{item.session.title}}</h2>
+          <p>{{item.session.confRoom}} - {{item.speakerName}}</p>
         </ion-item>
         <ion-item>
-          <p>{{item.desc}}</p>
+          <p>{{item.session.desc}}</p>
         </ion-item>
         <ion-item>
-          <ion-badge item-left>{{item.type}}</ion-badge>
-          <ion-badge item-left color="secondary">{{item.lang}}</ion-badge>
+          <ion-badge item-left>{{item.session.type}}</ion-badge>
+          <ion-badge item-left color="secondary">{{item.session.lang}}</ion-badge>
           <ion-icon item-right name="md-arrow-round-forward"></ion-icon>
         </ion-item>
       </ion-card>
