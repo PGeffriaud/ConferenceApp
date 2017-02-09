@@ -5,6 +5,7 @@ import { Session } from '../../types/Session'
 import { Speaker } from '../../types/Speaker'
 import { SessionService } from '../../services/sessions.service'
 import { SpeakerService } from '../../services/speakers.service'
+import { SpeakerDetail } from '../speaker-detail/speaker-detail'
 
 @Component({
   selector: 'page-session-detail',
@@ -29,7 +30,7 @@ export class SessionDetail {
     })
   }
 
-  lookAt(speakerId: string): void {
-    console.log(speakerId);
+  lookAt(speakerId: string) {
+    this.navCtrl.push(SpeakerDetail, {id: speakerId})
   }
 }

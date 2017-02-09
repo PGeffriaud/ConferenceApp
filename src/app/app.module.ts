@@ -6,6 +6,7 @@ import { Home } from '../pages/home/home';
 import { Sessions } from '../pages/sessions/sessions';
 import { Speakers } from '../pages/speakers/speakers';
 import { SessionDetail } from '../pages/session-detail/session-detail';
+import { SpeakerDetail } from '../pages/speaker-detail/speaker-detail';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { SessionDetail } from '../pages/session-detail/session-detail';
     Home,
     Sessions,
     Speakers,
-    SessionDetail
+    SessionDetail,
+    SpeakerDetail
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -25,7 +27,8 @@ import { SessionDetail } from '../pages/session-detail/session-detail';
     Home,
     Sessions,
     Speakers,
-    SessionDetail
+    SessionDetail,
+    SpeakerDetail
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

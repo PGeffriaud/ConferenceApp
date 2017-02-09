@@ -21,6 +21,14 @@ export class SpeakerService {
     })
   }
 
+  getSpeakerById(id): Promise<Speaker> {
+    return new Promise((resolve, reject) => {
+      this.http.request(this.path).subscribe(res => {
+        resolve(res.json()['speakers'].find(speaker => speaker.id === id))
+      })
+    })
+  }
+
   /*
     Return the first speaker of the ids array
   */

@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Speaker</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="row">
+    <div class="col col-center text-center">
+      <h1>{{speaker?.firstname}} {{speaker?.lastname}}</h1>
+      <img src="images/{{speaker?.image || 'default_avatar.jpg'}}" alt="pic" class="speakerPic" height="250" width="250"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-center text-center">
+      <button ion-button icon-only *ngFor="let social of speaker?.socials" (click)="openExternalLink(social.link)">
+        <ion-icon name="{{socialPic[social.class]}}"></ion-icon>
+      </button>
+    </div>
+  </div>
+
+
+  <ion-list no-lines>
+      <ion-card *ngFor="let item of sessions" (click)="lookAtSession(item.id)">
+        <ion-item text-wrap>
+          <h2>{{item.title}}</h2>
+          <p>{{item.confRoom}}</p>
+        </ion-item>
+        <ion-item>
+          <ion-badge item-left>{{item.type}}</ion-badge>
+          <ion-badge item-left color="secondary">{{item.lang}}</ion-badge>
+          <ion-icon item-right name="md-arrow-round-forward"></ion-icon>
+        </ion-item>
+      </ion-card>
+  </ion-list>
+</ion-content>

@@ -29,5 +29,13 @@ export class SessionService {
     })
   }
 
+  getSessionsBySpeakerId(speakerId: string): Promise<Array<Session>> {
+    return new Promise((resolve, reject) => {
+      this.http.request(this.path).subscribe(res => {
+        resolve(res.json()['sessions'].filter(s => s.speakers && s.speakers.indexOf(speakerId) >= 0))
+      })
+    })
+  }
+
 
 }
