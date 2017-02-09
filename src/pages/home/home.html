@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Meetup</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-card-content>
+      <img src="images/imt-logo.jpg" alt="logo-imt" />
+      <hr/>
+      <h1>Meetup</h1>
+      <h3>Du 12/03/17 au 18/03/17</h3>
+    </ion-card-content>
+  </ion-card>
+
+  <button ion-button secondary outline full (click)="goTo('sessions')">Sessions</button>
+  <button ion-button secondary outline full (click)="goTo('speakers')">Speakers</button>
+  <button ion-button secondary outline full>About</button>
+</ion-content>
