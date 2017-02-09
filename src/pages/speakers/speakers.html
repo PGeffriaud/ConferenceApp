@@ -17,5 +17,16 @@
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-card *ngFor="let speaker of speakers" (click)="lookAt(speaker.id)" >
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="images/{{speaker.image}}">
+        </ion-avatar>
+        <h2><b>{{speaker.firstname}} {{speaker.lastname}}</b></h2>
+        <p [hidden]="!speaker.company"><b>Company : </b>{{speaker.company}}</p>
+        <ion-icon item-right name="md-arrow-round-forward"></ion-icon>
+      </ion-item>
+    </ion-card>
+  </ion-list>
 </ion-content>
