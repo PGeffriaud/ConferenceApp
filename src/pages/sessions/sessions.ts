@@ -9,7 +9,7 @@ import { NavController, NavParams } from 'ionic-angular';
 export class Sessions {
   selectedItem: any;
   icons: string[];
-  items: Array<{id: string, title: string, room: string, desc: string, type: string, speakerName: string, speakerPic: string}>
+  items: Array<{id: string, title: string, room: string, desc: string, type: string, lang: string, speakerName: string, speakerPic: string}>
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) {
 
@@ -29,6 +29,7 @@ export class Sessions {
           room: s.confRoom,
           desc: s.desc,
           type: s.type,
+          lang: s.lang,
           speakerName: speaker ? speaker.firstname + ' ' + speaker.lastname : '',
           speakerPic: speaker ? speaker.image : 'default_avatar.jpg'
         })
