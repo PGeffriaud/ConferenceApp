@@ -2,6 +2,9 @@
 
   <ion-navbar>
     <ion-title>Speaker</ion-title>
+    <ion-buttons ion-button icon-only color="dark" clear end>
+      <ion-icon name="home"></ion-icon>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -12,6 +15,7 @@
     <div class="col col-center text-center">
       <h1>{{speaker?.firstname}} {{speaker?.lastname}}</h1>
       <img src="images/{{speaker?.image || 'default_avatar.jpg'}}" alt="pic" class="speakerPic" height="250" width="250"/>
+      <p>{{speaker?.about}}</p>
     </div>
   </div>
   <div class="row">
@@ -22,6 +26,7 @@
     </div>
   </div>
 
+  <hr/>
 
   <ion-list no-lines>
       <ion-card *ngFor="let item of sessions" (click)="lookAtSession(item.id)">
