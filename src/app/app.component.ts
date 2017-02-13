@@ -5,6 +5,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { Home } from '../pages/home/home';
 import { Sessions } from '../pages/sessions/sessions';
 import { Speakers } from '../pages/speakers/speakers';
+import { About } from '../pages/about/about';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: Home },
       { title: 'Sessions', component: Sessions },
-      { title: 'Speakers', component: Speakers }
+      { title: 'Speakers', component: Speakers },
+      { title: 'About', component: About }
     ];
 
   }

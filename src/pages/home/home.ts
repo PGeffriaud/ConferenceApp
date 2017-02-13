@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 
 import { Sessions } from '../sessions/sessions';
 import { Speakers } from '../speakers/speakers';
+import { About } from '../about/about';
 
 @Component({
   selector: 'page-home',
@@ -15,7 +16,8 @@ export class Home {
   constructor(public navCtrl: NavController) {
     this.pages = {
       'sessions' : Sessions,
-      'speakers' : Speakers
+      'speakers' : Speakers,
+      'about' : About
     }
   }
 
