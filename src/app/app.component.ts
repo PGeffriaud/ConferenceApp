@@ -39,7 +39,7 @@ export class MyApp {
 
         this.db = new SQLite()
         this.db.openDatabase({name: "data.db", location: "default"}).then(() => {
-          this.db.executeSql('CREATE TABLE IF NOT EXISTS NOTES (id integer primary key, comment text, sessionId text)', {}).then(data => {
+          this.db.executeSql('CREATE TABLE IF NOT EXISTS NOTES (id integer primary key, comment text, sessionId text, picture text)', {}).then(data => {
             console.log('Table notes created')
           }, error => {
             console.error('Unable to execute sql', error)

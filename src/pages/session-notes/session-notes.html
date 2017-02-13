@@ -12,7 +12,16 @@
 <hr/>
 <ion-item>
   <ion-label stacked>Editer mes notes</ion-label>
-  <ion-textarea rows="6" [(ngModel)]="notes"></ion-textarea>
+  <ion-textarea rows="6" [(ngModel)]="note.comment"></ion-textarea>
 </ion-item>
 <button class="save-button" ion-button block (click)="saveNotes()">Enregistrer</button>
+<button ion-button block color="light" (click)="takePic(sourceTypes['camera'])">
+  <ion-icon name="camera"></ion-icon>&nbsp;Prendre une photo
+</button>
+<button ion-button block color="light" (click)="takePic(sourceTypes['library'])">
+  <ion-icon name="camera"></ion-icon>&nbsp;Depuis librairie
+</button>
+
+
+<img [hidden]="! note.picture" src="{{note.picture}}" alt="sessionPicture" />
 </ion-content>
