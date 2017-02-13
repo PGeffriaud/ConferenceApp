@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Mes Notes</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<h2>{{session?.title}}</h2>
+<hr/>
+<ion-item>
+  <ion-label stacked>Editer mes notes</ion-label>
+  <ion-textarea rows="6" [(ngModel)]="notes"></ion-textarea>
+</ion-item>
+<button class="save-button" ion-button block (click)="saveNotes()">Enregistrer</button>
+</ion-content>

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { StatusBar, Splashscreen, SQLite } from 'ionic-native';
 
 import { Home } from '../pages/home/home';
 import { Sessions } from '../pages/sessions/sessions';
@@ -17,6 +17,7 @@ export class MyApp {
   rootPage: any = Home;
 
   pages: Array<{title: string, component: any}>;
+  db: SQLite
 
   constructor(public platform: Platform) {
     this.initializeApp();
@@ -33,11 +34,20 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
-    });
+
+        this.db = new SQLite()
+        this.db.openDatabase({name: "data.db", location: "default"}).then(() => {
+          this.db.executeSql('CREATE TABLE IF NOT EXISTS NOTES (id integer primary key, comment text, sessionId text)', {}).then(data => {
+            console.log('Table notes created')
+          }, error => {
+            console.error('Unable to execute sql', error)
+          })
+        }, error => {
+          console.error('Unable to open database', error)
+        })
+      })
   }
 
   openPage(page) {

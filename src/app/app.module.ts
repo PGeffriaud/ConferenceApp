@@ -6,6 +6,7 @@ import { Home } from '../pages/home/home';
 import { Sessions } from '../pages/sessions/sessions';
 import { Speakers } from '../pages/speakers/speakers';
 import { SessionDetail } from '../pages/session-detail/session-detail';
+import { SessionNotes } from '../pages/session-notes/session-notes';
 import { SpeakerDetail } from '../pages/speaker-detail/speaker-detail';
 import { About } from '../pages/about/about';
 
@@ -16,6 +17,7 @@ import { About } from '../pages/about/about';
     Sessions,
     Speakers,
     SessionDetail,
+    SessionNotes,
     SpeakerDetail,
     About
   ],
@@ -30,6 +32,7 @@ import { About } from '../pages/about/about';
     Sessions,
     Speakers,
     SessionDetail,
+    SessionNotes,
     SpeakerDetail,
     About
   ],
