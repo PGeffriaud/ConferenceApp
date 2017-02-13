@@ -1,11 +1,8 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>Mes Notes</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
 <h2>{{session?.title}}</h2>
@@ -15,13 +12,36 @@
   <ion-textarea rows="6" [(ngModel)]="note.comment"></ion-textarea>
 </ion-item>
 <button class="save-button" ion-button block (click)="saveNotes()">Enregistrer</button>
-<button ion-button block color="light" (click)="takePic(sourceTypes['camera'])">
-  <ion-icon name="camera"></ion-icon>&nbsp;Prendre une photo
-</button>
-<button ion-button block color="light" (click)="takePic(sourceTypes['library'])">
-  <ion-icon name="camera"></ion-icon>&nbsp;Depuis librairie
-</button>
 
+<ion-row class="media">
+  <button ion-button icon-only round large clear color="dark" (click)="takePic(sourceTypes['camera'])">
+    <ion-icon name="md-camera"></ion-icon>
+  </button>
+  <button ion-button icon-only round large clear color="dark" (click)="takePic(sourceTypes['library'])">
+    <ion-icon name="md-images"></ion-icon>
+  </button>
+  <button ion-button icon-only round large clear color="danger" (click)="recordMicro()">
+    <ion-icon name="md-mic"></ion-icon>
+  </button>
+  <button ion-button icon-only round large clear color="danger" (click)="recordVideo()">
+    <ion-icon name="md-videocam"></ion-icon>
+  </button>
+</ion-row>
 
-<img [hidden]="! note.picture" src="{{note.picture}}" alt="sessionPicture" />
+<ion-row [hidden]="! note.picture">
+  <img src="{{note.picture}}" alt="sessionPicture" />
+</ion-row>
+
+<ion-row>
+  <ion-col [hidden]="! note.video.path">
+    <button ion-button block icon-left (click)="openMedia(note.video)">
+      <ion-icon name="md-play"></ion-icon>Play video
+    </button>
+  </ion-col>
+  <ion-col [hidden]="! note.audio.path">
+    <button ion-button icon-left block (click)="openMedia(note.audio)">
+      <ion-icon name="md-play"></ion-icon>Play audio
+    </button>
+  </ion-col>
+</ion-row>
 </ion-content>

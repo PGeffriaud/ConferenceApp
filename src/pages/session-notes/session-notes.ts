@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import { Camera } from 'ionic-native';
+import { Camera, FileOpener } from 'ionic-native';
 
 import { Session } from '../../types/Session';
-import { Comment } from '../../types/Comment'
+import { Comment, Media } from '../../types/Comment'
 
 import { SessionService } from '../../services/sessions.service'
 import { CommentService } from '../../services/comment.service'
 import { CameraService } from '../../services/camera.service'
+import { MediaService } from '../../services/medias.service'
 
 @Component({
   selector: 'page-session-notes',
   templateUrl: 'session-notes.html',
-  providers: [SessionService, CommentService, CameraService]
+  providers: [SessionService, CommentService, CameraService, MediaService]
 })
 
 export class SessionNotes {
@@ -21,13 +22,16 @@ export class SessionNotes {
   note: Comment
   sourceTypes: {[key:string]: number}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform, private sessionService: SessionService, private commentService: CommentService, private cameraService: CameraService) {
+  video: any
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform, private sessionService: SessionService, private commentService: CommentService, private cameraService: CameraService, private mediaService: MediaService) {
     this.sourceTypes = {
       'camera': Camera.PictureSourceType.CAMERA,
       'library': Camera.PictureSourceType.PHOTOLIBRARY
     }
 
-    this.note = {sessionId: navParams.data.id, comment: '', picture: ''}
+    this.note = new Comment()
+    this.note.sessionId = navParams.data.id
 
     sessionService.getSessionById(this.note.sessionId).then(session => {
       this.session = session
@@ -47,7 +51,7 @@ export class SessionNotes {
       data => {
         if(data.rows.length > 0) {
           console.log('GET', data.rows.item(0))
-          this.note = data.rows.item(0)
+          this.note = this.commentService.dbToComment(data.rows.item(0))
         }
       }, error => {
         console.error(error)
@@ -55,7 +59,6 @@ export class SessionNotes {
   }
 
   saveNotes(): void {
-    console.log("Saving...", this.note)
     this.commentService.save(this.note).then(
       data => {},
       error => {
@@ -73,5 +76,32 @@ export class SessionNotes {
       })
   }
 
+  recordMicro(): void {
+    this.mediaService.recordAudio().then(
+      data => {
+        this.note.audio = {
+          path: data[0].fullPath,
+          type : data[0].type
+        }
+        this.saveNotes()
+      }
+    )
+  }
 
+  recordVideo(): void {
+    this.mediaService.recordVideo().then(
+      data => {
+        this.note.video = {
+          path: data[0].fullPath,
+          type: data[0].type
+        }
+        this.saveNotes()
+      },
+      error => console.error(error)
+    )
+  }
+
+  openMedia(media: Media) {
+    FileOpener.open(media.path, media.type)
+  }
 }

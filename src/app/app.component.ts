@@ -33,13 +33,26 @@ export class MyApp {
   }
 
   initializeApp() {
+    let createNotesTableQuery: string = `
+      CREATE TABLE IF NOT EXISTS NOTES
+      (
+        id integer primary key,
+        comment text,
+        sessionId text,
+        picture text,
+        videoPath text,
+        videoType text,
+        audioPath text,
+        audioType text
+      )`
+
     this.platform.ready().then(() => {
       StatusBar.styleDefault();
       Splashscreen.hide();
 
         this.db = new SQLite()
         this.db.openDatabase({name: "data.db", location: "default"}).then(() => {
-          this.db.executeSql('CREATE TABLE IF NOT EXISTS NOTES (id integer primary key, comment text, sessionId text, picture text)', {}).then(data => {
+          this.db.executeSql(createNotesTableQuery, {}).then(data => {
             console.log('Table notes created')
           }, error => {
             console.error('Unable to execute sql', error)
