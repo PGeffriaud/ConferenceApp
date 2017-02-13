@@ -32,6 +32,7 @@ export class SpeakerDetail {
         "twitter": "logo-twitter",
         "google-plus": "logo-googleplus",
         "github": "logo-github",
+        "linkedin": "logo-linkedin",
         "link": "md-link"
       }
   }
