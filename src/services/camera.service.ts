@@ -9,11 +9,11 @@ export class CameraService {
 
   constructor() {}
 
-  // Returns a promise containing base 64 encoding picture
+  // Returns a promise containing picture URI
   takePic(sourceType: number): Promise<string> {
       return Camera.getPicture({
         sourceType: sourceType,
-        destinationType: Camera.DestinationType.DATA_URL,
+        destinationType: Camera.DestinationType.FILE_URI,
         cameraDirection: Camera.Direction.BACK
       })
   }

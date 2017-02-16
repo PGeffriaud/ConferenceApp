@@ -38,6 +38,10 @@ export class CommentService {
     })
   }
 
+  deletePic(sessionId: string): Promise<any> {
+    return this.database.executeSql("UPDATE NOTES SET picture = '' WHERE sessionId = ?", [sessionId])
+  }
+
   dbToComment(resSQL: any): Comment {
     let com = new Comment();
     com.sessionId = resSQL.sessionId

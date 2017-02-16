@@ -28,7 +28,7 @@
   </button>
 </ion-row>
 
-<ion-row [hidden]="! note.picture">
+<ion-row [hidden]="! note.picture" (click)="openShareMenu()">
   <img src="{{note.picture}}" alt="sessionPicture" />
 </ion-row>
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import { Camera, FileOpener } from 'ionic-native';
+import { Camera, FileOpener, ActionSheet } from 'ionic-native';
 
 import { Session } from '../../types/Session';
 import { Comment, Media } from '../../types/Comment'
@@ -69,7 +69,8 @@ export class SessionNotes {
   takePic(sourceType: number) : void {
     this.cameraService.takePic(sourceType).then(
       imageData => {
-        this.note.picture = 'data:image/jpeg;base64,' + imageData
+        console.log(imageData)
+        this.note.picture = imageData
         this.saveNotes()
       }, error => {
         console.error('Picture error', error)
@@ -101,7 +102,31 @@ export class SessionNotes {
     )
   }
 
-  openMedia(media: Media) {
+  openMedia(media: Media): void {
     FileOpener.open(media.path, media.type)
+  }
+
+  openShareMenu(): void {
+    let buttonLabels = ['Share via Facebook', 'Share via Twitter'];
+    ActionSheet.show({
+      'title': 'What do you want to do ?',
+      'buttonLabels': buttonLabels,
+      'addCancelButtonWithLabel': 'Cancel',
+      'addDestructiveButtonWithLabel' : 'Delete'
+    }).then((buttonIndex: number) => {
+
+        switch(buttonIndex) {
+          case 1: { // Delete picture
+            this.commentService.deletePic(this.note.sessionId).then(
+              success => this.note.picture = '',
+              error => console.error(error)
+            )
+            break;
+          }
+          //  case 2: this.shareService.shareViaTwitter(this.note.picture)
+          //  case 3: this.shareService.shareViaFacebook(this.note.picture)
+          default: break;
+        }
+    });
   }
 }
