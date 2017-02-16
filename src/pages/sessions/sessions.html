@@ -9,6 +9,7 @@
 
 <ion-content>
   <ion-list no-lines>
+      <ion-item [hidden]="!overlaping" style="color: red">There are some conflicts between your favorites session</ion-item>
       <ion-item>
         <ion-label><h2>Show my favorites</h2></ion-label>
         <ion-toggle checked="false" item-right [(ngModel)]="filterByFavorites"></ion-toggle>

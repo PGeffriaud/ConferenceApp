@@ -8,6 +8,8 @@ import { SpeakerService } from '../../services/speakers.service';
 import { PeriodService } from '../../services/period.service';
 import { FavoriteService } from '../../services/favorites.service';
 
+import * as moment from 'moment'
+
 @Component({
   selector: 'page-sessions',
   templateUrl: 'sessions.html',
@@ -19,6 +21,7 @@ export class Sessions {
   trucs: any;
   items: Array<{session: Session, speakerName: string, speakerPic: string, isFavorite: Boolean}>
   filterByFavorites: Boolean
+  overlaping: Boolean
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -29,6 +32,7 @@ export class Sessions {
               private periodService: PeriodService,
               private favoriteService: FavoriteService) {
     this.items = []
+    this.overlaping = false
     this.favoriteService.connect().then(() => {
       sessionService.getSessions().then(sessions => {
 
@@ -61,14 +65,25 @@ export class Sessions {
   toggleFavorite(item) {
     this.favoriteService.set(item.session.id, item.isFavorite).then(
       success => {
-          this.toastCtrl.create({
-          message: item.isFavorite ? 'The session has been added to your favorite' : 'The session has been removed from your favorite',
-          position: 'top',
+        this.toastCtrl.create({
+          message: item.isFavorite ? 'Favorite added successfully' : 'Favorite removed successfully',
           duration: 3000
-        }).present();
+        });
+        this.checkAvailability(item)
       },
       error => console.error(error)
     )
+  }
+
+//(StartA <= EndB)  and  (EndA >= StartB)
+  private checkAvailability(item) {
+    let samePeriods = this.items.filter(i =>
+                  i.isFavorite
+                  && i.session.id != item.session.id
+                  && moment(i.session.dateBegin).isSameOrBefore(item.session.dateBegin)
+                  && moment(i.session.dateEnd).isSameOrAfter(item.session.dateBegin))
+
+    this.overlaping = samePeriods.length > 0
   }
 
   lookAt(idSession: string) {

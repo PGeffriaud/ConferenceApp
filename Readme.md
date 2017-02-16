@@ -17,6 +17,7 @@
 * Accéder au détail d'un speaker et les sessions associées
   * Lien vers les pages perso
 * Ajouter des sessions à sa liste de favoris et les lister
+  * Affichage d'une alert en cas de conflits de date
 * Ajouter/supprimer un speaker à la liste de contact du téléphone
 * Prise de note sur une session
   * Ajout/suppression d'une photo
