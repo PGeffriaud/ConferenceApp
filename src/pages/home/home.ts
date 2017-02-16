@@ -11,7 +11,8 @@ import { About } from '../about/about';
   templateUrl: 'home.html'
 })
 export class Home {
-  pages: Object;
+  pages: Object
+  date: Date
 
   constructor(public navCtrl: NavController) {
     this.pages = {
@@ -19,6 +20,8 @@ export class Home {
       'speakers' : Speakers,
       'about' : About
     }
+
+    this.date = new Date()
   }
 
   goTo(page) {

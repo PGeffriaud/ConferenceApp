@@ -14,6 +14,9 @@
           <ion-avatar item-left>
             <img src="images/{{item.speakerPic}}">
           </ion-avatar>
+          <ion-toggle checked="false" item-right [(ngModel)]="item.isFavorite" (ionChange)="toggleFavorite(item)"></ion-toggle>
+        </ion-item>
+        <ion-item>
           <h2>{{item.session.title}}</h2>
           <p>{{item.session.confRoom}} - {{item.speakerName}}</p>
           <p>{{item.session.dateBegin | date: 'HH:mm'}} - {{item.session.dateEnd | date: 'HH:mm'}}</p>

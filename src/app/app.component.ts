@@ -46,6 +46,14 @@ export class MyApp {
         audioType text
       )`
 
+      let createFavoriteTableQuery: string = `
+        CREATE TABLE IF NOT EXISTS FAVORITES
+        (
+          id integer primary key,
+          sessionId text
+        )
+      `
+
     this.platform.ready().then(() => {
       StatusBar.styleDefault();
       Splashscreen.hide();
@@ -54,6 +62,12 @@ export class MyApp {
         this.db.openDatabase({name: "data.db", location: "default"}).then(() => {
           this.db.executeSql(createNotesTableQuery, {}).then(data => {
             console.log('Table notes created')
+          }, error => {
+            console.error('Unable to execute sql', error)
+          })
+
+          this.db.executeSql(createFavoriteTableQuery, {}).then(data => {
+            console.log('Table favorites created')
           }, error => {
             console.error('Unable to execute sql', error)
           })
