@@ -5,11 +5,16 @@ import { Session } from '../../types/Session';
 import { SessionDetail } from '../session-detail/session-detail';
 import { SessionService } from '../../services/sessions.service';
 import { SpeakerService } from '../../services/speakers.service';
+import { PeriodService } from '../../services/period.service';
+
+import * as moment from 'moment'
+
+//import { SortSessions } from '../../pipes/sortSession.pipe';
 
 @Component({
   selector: 'page-sessions',
   templateUrl: 'sessions.html',
-  providers: [SessionService, SpeakerService]
+  providers: [SessionService, SpeakerService, PeriodService],
 })
 export class Sessions {
   selectedItem: any;
@@ -17,11 +22,20 @@ export class Sessions {
   trucs: any;
   items: Array<{session: Session, speakerName: string, speakerPic: string}>
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private sessionService: SessionService, private speakerService: SpeakerService) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private http: Http,
+              private sessionService: SessionService,
+              private speakerService: SpeakerService,
+              private periodService: PeriodService) {
 
     this.items = []
     sessionService.getSessions().then(sessions => {
-      sessions.forEach(s => {
+
+      sessions.forEach( (s,i) => {
+          this.periodService.getBeginDate(s.hour).then(date => s.dateBegin = date)
+          this.periodService.getEndDate(s.hour).then(date => s.dateEnd = date)
+
           speakerService.getSpeakerByIds(s.speakers).then(speakers => {
             this.items.push({
               session: s,
@@ -29,7 +43,10 @@ export class Sessions {
               speakerPic: (speakers && speakers.length > 0) ? speakers[0].image : 'default_avatar.jpg'
             })
           })
+
+
       })
+
     })
 
   }

@@ -9,6 +9,7 @@ import { SessionDetail } from '../pages/session-detail/session-detail';
 import { SessionNotes } from '../pages/session-notes/session-notes';
 import { SpeakerDetail } from '../pages/speaker-detail/speaker-detail';
 import { About } from '../pages/about/about';
+import { SortSessions } from '../pipes/sortSession.pipe'
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { About } from '../pages/about/about';
     SessionDetail,
     SessionNotes,
     SpeakerDetail,
-    About
+    About,
+    SortSessions
   ],
   imports: [
     IonicModule.forRoot(MyApp),

@@ -11,4 +11,6 @@ export interface Session {
     video: string
     slides: string;
     speakers: string[];
+    dateBegin: Date;
+    dateEnd: Date;
 }

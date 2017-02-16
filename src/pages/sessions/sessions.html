@@ -9,13 +9,14 @@
 
 <ion-content>
   <ion-list no-lines>
-      <ion-card *ngFor="let item of items" (click)="lookAt(item.session.id)">
+      <ion-card *ngFor="let item of items | sortSessions" (click)="lookAt(item.session.id)">
         <ion-item text-wrap>
           <ion-avatar item-left>
             <img src="images/{{item.speakerPic}}">
           </ion-avatar>
           <h2>{{item.session.title}}</h2>
           <p>{{item.session.confRoom}} - {{item.speakerName}}</p>
+          <p>{{item.session.dateBegin | date: 'HH:mm'}} - {{item.session.dateEnd | date: 'HH:mm'}}</p>
         </ion-item>
         <ion-item>
           <ion-badge item-left>{{item.session.type}}</ion-badge>
