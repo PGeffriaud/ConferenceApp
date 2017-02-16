@@ -9,9 +9,8 @@
 
 <ion-content padding>
   <ion-card>
-    <ion-card-header><b>About phone</b></ion-card-header>
+    <ion-card-header><b>About Phone</b></ion-card-header>
     <ion-card-content>
-      <b>UUID :</b> {{info.uuid}} <br/>
       <b>Platform :</b> {{info.platform}} <br/>
       <b>Model :</b> {{info.model}} <br/>
       <b>version :</b> {{info.version}} <br/>
@@ -19,12 +18,29 @@
     </ion-card-content>
   </ion-card>
   <ion-card>
-    <ion-card-header><b>About App</b></ion-card-header>
+    <ion-card-header><b>About Application</b></ion-card-header>
+    <ion-card-content>
+      <b>Name :</b> {{info?.appName}} <br/>
+      <b>Version :</b> {{info?.appVersion}} <br/>
+      <b>Description :</b> This app can be used to list the next devfest talks, know more about it and about their speakers
+      <button ion-button block outline icon-left (click)="open('github')">
+        <ion-icon name="logo-github"></ion-icon>
+          Github Repository
+      </button>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header><b>About Developper</b></ion-card-header>
     <ion-card-content>
       <b>Developer :</b> Pierre GEFFRIAUD <br/>
       <b>Organization :</b> Ecole des Mines de Nantes <br/>
       <b>Promotion :</b> FIL A3 <br/>
-      <b>Date :</b> 2017<br/>
+      <button ion-button icon-only (click)="open('linkedin')">
+        <ion-icon name="logo-linkedin"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="open('mygithub')">
+        <ion-icon name="logo-github"></ion-icon>
+      </button>
     </ion-card-content>
   </ion-card>
 </ion-content>
