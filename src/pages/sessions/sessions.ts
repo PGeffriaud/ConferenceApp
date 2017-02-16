@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Session } from '../../types/Session';
 import { SessionDetail } from '../session-detail/session-detail';
 import { SessionService } from '../../services/sessions.service';
@@ -18,22 +18,16 @@ export class Sessions {
   icons: string[];
   trucs: any;
   items: Array<{session: Session, speakerName: string, speakerPic: string, isFavorite: Boolean}>
+  filterByFavorites: Boolean
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public toastCtrl: ToastController,
-              public loadingCtrl: LoadingController,
               private http: Http,
               private sessionService: SessionService,
               private speakerService: SpeakerService,
               private periodService: PeriodService,
               private favoriteService: FavoriteService) {
-
-    let loading = this.loadingCtrl.create({
-      content: 'Please wait...'
-    })
-    loading.present();
-
     this.items = []
     this.favoriteService.connect().then(() => {
       sessionService.getSessions().then(sessions => {
@@ -55,7 +49,7 @@ export class Sessions {
           })
 
           if(id === (sessions.length-1)) {
-            loading.dismiss()
+            navParams.data.dismiss()
           }
         })
       })

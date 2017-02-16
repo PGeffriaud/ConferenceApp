@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 
 import { Sessions } from '../sessions/sessions';
 import { Speakers } from '../speakers/speakers';
@@ -14,7 +14,7 @@ export class Home {
   pages: Object
   date: Date
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController) {
     this.pages = {
       'sessions' : Sessions,
       'speakers' : Speakers,
@@ -25,6 +25,14 @@ export class Home {
   }
 
   goTo(page) {
-    this.navCtrl.push(this.pages[page])
+    if(page === 'sessions') {
+      let loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      })
+      loading.present();
+      this.navCtrl.push(this.pages[page], loading)
+    } else {
+      this.navCtrl.push(this.pages[page])
+    }
   }
 }
