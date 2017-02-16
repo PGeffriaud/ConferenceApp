@@ -48,7 +48,7 @@ export class Sessions {
                 })
           })
 
-          if(id === (sessions.length-1)) {
+          if(id === (sessions.length-1) && navParams.data) {
             navParams.data.dismiss()
           }
         })

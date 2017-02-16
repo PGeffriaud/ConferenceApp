@@ -7,7 +7,7 @@
 <ion-content padding>
   <ion-card>
     <ion-item text-wrap><h1>{{session?.title}}</h1></ion-item>
-    <ion-item>{{session?.confRoom}} - {{session?.dateBegin | date:'HH:mm' }} - {{session?.dateEnd | date:'HH:mm'}}</ion-item>
+    <ion-item>{{session?.confRoom}} <br/> {{session?.dateBegin | date:'HH:mm' }} - {{session?.dateEnd | date:'HH:mm'}}</ion-item>
     <ion-card-content>
       <p [innerHTML]="session?.desc"></p>
     </ion-card-content>
