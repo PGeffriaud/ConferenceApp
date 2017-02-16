@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { Session } from '../../types/Session';
 import { SessionDetail } from '../session-detail/session-detail';
 import { SessionService } from '../../services/sessions.service';
@@ -22,17 +22,23 @@ export class Sessions {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public toastCtrl: ToastController,
+              public loadingCtrl: LoadingController,
               private http: Http,
               private sessionService: SessionService,
               private speakerService: SpeakerService,
               private periodService: PeriodService,
               private favoriteService: FavoriteService) {
 
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    })
+    loading.present();
+
     this.items = []
     this.favoriteService.connect().then(() => {
       sessionService.getSessions().then(sessions => {
 
-        sessions.forEach( (s:Session) => {
+        sessions.forEach( (s:Session, id:number) => {
             this.periodService.getBeginDate(s.hour).then(date => s.dateBegin = date)
             this.periodService.getEndDate(s.hour).then(date => s.dateEnd = date)
 
@@ -47,6 +53,10 @@ export class Sessions {
                   })
                 })
           })
+
+          if(id === (sessions.length-1)) {
+            loading.dismiss()
+          }
         })
       })
 
@@ -58,7 +68,7 @@ export class Sessions {
     this.favoriteService.set(item.session.id, item.isFavorite).then(
       success => {
           this.toastCtrl.create({
-          message: 'The session has been added to your favorite',
+          message: item.isFavorite ? 'The session has been added to your favorite' : 'The session has been removed from your favorite',
           position: 'top',
           duration: 3000
         }).present();
