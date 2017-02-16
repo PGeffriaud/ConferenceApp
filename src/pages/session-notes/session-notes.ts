@@ -9,11 +9,12 @@ import { SessionService } from '../../services/sessions.service'
 import { CommentService } from '../../services/comment.service'
 import { CameraService } from '../../services/camera.service'
 import { MediaService } from '../../services/medias.service'
+import { ShareService } from '../../services/share.service'
 
 @Component({
   selector: 'page-session-notes',
   templateUrl: 'session-notes.html',
-  providers: [SessionService, CommentService, CameraService, MediaService]
+  providers: [SessionService, CommentService, CameraService, MediaService, ShareService]
 })
 
 export class SessionNotes {
@@ -24,7 +25,7 @@ export class SessionNotes {
 
   video: any
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform, private sessionService: SessionService, private commentService: CommentService, private cameraService: CameraService, private mediaService: MediaService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform, private sessionService: SessionService, private commentService: CommentService, private cameraService: CameraService, private mediaService: MediaService, private shareService: ShareService) {
     this.sourceTypes = {
       'camera': Camera.PictureSourceType.CAMERA,
       'library': Camera.PictureSourceType.PHOTOLIBRARY
@@ -107,7 +108,8 @@ export class SessionNotes {
   }
 
   openShareMenu(): void {
-    let buttonLabels = ['Share via Facebook', 'Share via Twitter'];
+    let buttonLabels = ['Share'];
+    
     ActionSheet.show({
       'title': 'What do you want to do ?',
       'buttonLabels': buttonLabels,
@@ -123,8 +125,7 @@ export class SessionNotes {
             )
             break;
           }
-          //  case 2: this.shareService.shareViaTwitter(this.note.picture)
-          //  case 3: this.shareService.shareViaFacebook(this.note.picture)
+          case 2: this.shareService.shareViaSocials(this.session.title, this.note.picture); break
           default: break;
         }
     });

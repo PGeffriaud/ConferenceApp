@@ -8,7 +8,7 @@ export interface Session {
     all: boolean;
     lang: string;
     hour: string;
-    vide: string
+    video: string
     slides: string;
     speakers: string[];
 }
